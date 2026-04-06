@@ -7,7 +7,10 @@ function App() {
       <h1>Welcome to the Page</h1>
 
       <Show when="signed-out">
-        <SignInButton mode='modal'/>
+        <SignInButton mode='modal'>
+          <button className="">Sign In</button>
+        </SignInButton>
+
       </Show>
 
       <Show when="signed-in">
