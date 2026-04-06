@@ -1,16 +1,16 @@
-import {Inngest} from "inngest";
+import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
 import User from "../models/User.js";
 
-export const inngest = new Inngest({ id: "smart-hire"});
+export const inngest = new Inngest({ id: "smart-hire" });
 
 const syncUser = inngest.createFunction(
-    {id: "sync-user"},
-    {event: "user.created"},
-    async ({event}) => {
+    { id: "sync-user" },
+    { event: "user.created" },
+    async ({ event }) => {
         await connectDB();
 
-        const {id, email_addresses, first_name, last_name, image_url} = event.data;
+        const { id, email_addresses, first_name, last_name, image_url } = event.data;
 
         const newUser = {
             clerkId: id,
@@ -27,14 +27,14 @@ const syncUser = inngest.createFunction(
 
 
 const deleteUserFromDB = inngest.createFunction(
-    {id: "delete-user-from-db"},
-    {event: "user.deleted"},
-    async ({event}) => {
+    { id: "delete-user-from-db" },
+    { event: "user.deleted" },
+    async ({ event }) => {
         await connectDB();
 
-        const {id} = event.data;
+        const { id } = event.data;
 
-        await User.deleteOne({clerkId: id});
+        await User.deleteOne({ clerkId: id });
 
         //todo smth else
     }
