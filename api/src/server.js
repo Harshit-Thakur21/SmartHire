@@ -20,7 +20,6 @@ app.use(
   serve({
     client: inngest,
     functions,
-    signingKey: ENV.INNGEST_SIGNING_KEY,
   })
 );
 
