@@ -18,6 +18,7 @@
     "inngest": "^4.0.0",
     "mongoose": "^9.3.1",
     "nodemon": "^3.1.14",
-    "smarthire": "file:.."
+    "smarthire": "file:..",
+    "stream-chat": "^9.40.0"
   }
 }
