@@ -6,7 +6,7 @@ export const inngest = new Inngest({ id: "smart-hire" });
 
 const syncUser = inngest.createFunction(
     { id: "sync-user" },
-    { event: "user.created" },
+    { event: "clerk/user.created" },
     async ({ event }) => {
         await connectDB();
 
@@ -28,7 +28,7 @@ const syncUser = inngest.createFunction(
 
 const deleteUserFromDB = inngest.createFunction(
     { id: "delete-user-from-db" },
-    { event: "user.deleted" },
+    { event: "clerk/user.deleted" },
     async ({ event }) => {
         await connectDB();
 
