@@ -37,15 +37,13 @@ if(ENV.NODE_ENV === "production"){
 
 const startServer = async () => {
     try {
-        connectDB();
-        app.listen(ENV.PORT, () => {
-            console.log("Server is runnig on port:", ENV.PORT)
-            connectDB();
-        });
+        await connectDB();
+        app.listen(ENV.PORT, () =>
+            console.log("Server is runnig on port:", ENV.PORT));
     }
     catch(error) {
         console.error("❌ Error starting the server", error);
     }
-}
+};
 
 startServer();
