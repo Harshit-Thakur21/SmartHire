@@ -1,4 +1,5 @@
 import {StreamChat} from "stream-chat";
+import { StreamClient } from "@stream-io/node-sdk"
 import { ENV } from "./env.js";
 
 const apiKey = ENV.STREAM_API_KEY;
@@ -8,7 +9,8 @@ if(!apiKey || !apiSecret){
     console.error("Stream API key or secret is missing in environment variables");
 }
 
-export const chatClient = StreamChat.getInstance(apiKey, apiSecret);
+export const chatClient = StreamChat.getInstance(apiKey, apiSecret); //this is for chat features, not video call
+export const streamClient = new StreamClient(apiKey, apiSecret); //this is for video call features
 
 export const upsertStreamUser = async (userData) => {
     try {
@@ -30,5 +32,3 @@ export const deleteStreamUser = async (userId) => {
         console.error("Error deleting stream user", error);
     }
 };
-
-//todo: add method to genrate token
