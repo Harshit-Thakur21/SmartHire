@@ -4,16 +4,22 @@ import HomePage from './pages/HomePage'
 import ProblemsPage from './pages/ProblemsPage'
 
 import { Toaster } from 'react-hot-toast'
+import DashboardPage from './pages/DashboardPage'
 
 function App() {
 
-  const {isSignedIn} = useUser()
+  const {isSignedIn, isLoaded} = useUser();
+
+  //this will get rid of the flash of the wrong page when the auth state is being loaded
+  if(!isLoaded) return null;
 
   return (
     <>
       <Routes>
 
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} />
+        <Route path='/dashboard' element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
+
         <Route path='/problems' element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"} />} />
 
       </Routes>
