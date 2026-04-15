@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../components/TempNavbar.jsx'
+import Navbar from '../components/Navbar.jsx'
 
 import { PROBLEMS } from '../data/problems';
 import { Link } from 'react-router';
