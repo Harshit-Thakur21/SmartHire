@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
+import Navbar from '../components/NavBar'
 
 import { PROBLEMS } from '../data/problems';
 import { Link } from 'react-router';
@@ -16,7 +16,7 @@ function ProblemsPage() {
 
   return (
     <div className='min-h-screen bg-base-200'>
-      <NavBar/>
+      <Navbar/>
 
       <div className='max-w-6xl mx-auto px-4 py-12'>
         {/* HEADER */}
