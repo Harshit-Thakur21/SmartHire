@@ -32,6 +32,51 @@ app.use(
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
 
+
+//Using Judge0 API to execute code securely
+app.post("/api/execute", async (req, res) => {
+  try {
+    const { language, source_code } = req.body;
+
+    const response = await fetch(
+      "https://ce.judge0.com/submissions?base64_encoded=false&wait=true",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          source_code,
+          language_id: getLanguageId(language),
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    res.json({
+      run: {
+        output: data.stdout,
+        stderr: data.stderr,
+      },
+    });
+
+  } catch (error) {
+    console.error("❌ Execution error:", error);
+    res.status(500).json({ error: "Execution failed" });
+  }
+});
+
+// LANGUAGE MAPPING (Judge0)
+function getLanguageId(language) {
+  const map = {
+    javascript: 63,
+    python: 71,
+    java: 62,
+  };
+  return map[language];
+}
+
 app.get("/health", (req, res) => {
     res.status(200).json({msg:"Success from the API"})
 });
