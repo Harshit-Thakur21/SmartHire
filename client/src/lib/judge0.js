@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5001";
+const API_BASE = import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:5001";
 
 const LANGUAGE_MAP = {
   javascript: "javascript",
