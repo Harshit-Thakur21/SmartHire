@@ -55,7 +55,7 @@ app.post("/api/execute", async (req, res) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          source_code,
+          source_code: finalCode,
           language_id: getLanguageId(language),
         }),
       }
