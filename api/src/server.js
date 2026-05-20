@@ -18,7 +18,10 @@ const __dirname = path.resolve();
 // Middleware
 app.use(express.json());
 // credentials: true allows cookies to be sent in cross-origin requests on browser
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+if (ENV.NODE_ENV !== "production") {
+    app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+}
+
 app.use(clerkMiddleware()); //this adds auth field to request object : req.auth()
 
 app.use(
