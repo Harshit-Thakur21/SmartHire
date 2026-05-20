@@ -41,6 +41,12 @@ app.post("/api/execute", async (req, res) => {
   try {
     const { language, source_code } = req.body;
 
+    // Judge0 requires Java public class to be named "Main"
+    let finalCode = source_code;
+    if (language === "java") {
+      finalCode = source_code.replace(/public\s+class\s+\w+/, "public class Main");
+    }
+
     const response = await fetch(
       "https://ce.judge0.com/submissions?base64_encoded=false&wait=true",
       {
