@@ -18,7 +18,11 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
 
         const initCall = async () => {
             if(!session?.callId) return;
-            if(!isHost && !isParticipant) return;
+            if (!isHost && !isParticipant && !session?.participant) return;
+            if(session.status === "completed") return;
+
+            // prevent double join if already connected
+            if (call) return;
 
             try {
                const {token, userId, userName, userImage} = await sessionAPI.getStreamToken();
@@ -75,7 +79,7 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
                 }
             })();
         };
-    }, [session, loadingSession, isHost, isParticipant]);
+    }, [session?.callId, session?.status, loadingSession, isHost, isParticipant]);
 
     return {
         streamClient,

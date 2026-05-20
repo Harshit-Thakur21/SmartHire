@@ -28,7 +28,7 @@ function SessionPage() {
 
     const session = sessionData?.session;
     const isHost = session?.host?.clerkId === user?.id;
-    const isParticipant = session?.participants?.clerkId === user?.id;
+    const isParticipant = session?.participant?.clerkId === user?.id;
 
     const { streamClient, call, chatClient, channel, isInitializingCall } = useStreamClient(
         session, 
