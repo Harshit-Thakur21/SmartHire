@@ -44,7 +44,7 @@ app.post("/api/execute", async (req, res) => {
     // Judge0 requires Java public class to be named "Main"
     let finalCode = source_code;
     if (language === "java") {
-      finalCode = source_code.replace(/public\s+class\s+\w+/, "public class Main");
+      finalCode = source_code.replace(/(?:public\s+)?class\s+\w+/, "class Main");
     }
 
     const response = await fetch(
